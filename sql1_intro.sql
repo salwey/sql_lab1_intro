@@ -1,5 +1,4 @@
--- F5 execute all
--- F9 execute statement
+
 use sakila;
 select count(title), count(distinct title) from film_list; -- 997 from film list view
 select count(title), count(distinct title) from film; -- 1000 - from film table
@@ -16,7 +15,11 @@ select * from film where film.title in (
 select * from film_actor where film_id in (257,323,803);
 -- the film_list inner joins to film_actor which does not contain these 3 films which is why we don't have them in the view
 
-select distinct name as language from language; 
+select distinct name as language from language; -- 6 languages in language table
+
+select distinct l.name as language   -- 1 language is used in films table
+from film f
+left join language l ON l.language_id = f.language_id;
 
 select count(*) from store;
 
